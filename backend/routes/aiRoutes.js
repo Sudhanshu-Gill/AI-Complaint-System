@@ -24,17 +24,6 @@ router.post(
       const { description } =
         req.body;
 
-      if (!description) {
-
-        return res.status(400).json({
-
-          message:
-            "Description Required"
-
-        });
-
-      }
-
       const completion =
         await client.chat.completions.create({
 
@@ -47,12 +36,12 @@ router.post(
               role: "system",
 
               content:
-                `Analyze complaints and provide:
+                `Analyze complaint and provide:
 
 1. Priority
 2. Category
-3. Suggested Department
-4. Recommended Action`
+3. Department
+4. Suggested Action`
             },
 
             {
@@ -65,7 +54,7 @@ router.post(
 
         });
 
-      res.status(200).json({
+      res.json({
 
         result:
           completion.choices[0]
@@ -76,15 +65,14 @@ router.post(
     } catch (error) {
 
       console.log(
-        "AI ERROR:",
+        error.response?.data ||
         error.message
       );
 
       res.status(500).json({
 
         message:
-          "AI Analysis Failed"
-
+          "AI Failed"
       });
 
     }
