@@ -25,7 +25,7 @@ function ComplaintList({
 
       await axios.put(
 
-        `http://localhost:5000/api/complaints/${id}`,
+        `https://ai-complaint-backend-rj1c.onrender.com/api/complaints/${id}`,
 
         {
           status: status
@@ -60,7 +60,7 @@ function ComplaintList({
 
       await axios.delete(
 
-        `http://localhost:5000/api/complaints/${id}`
+        `https://ai-complaint-backend-rj1c.onrender.com/api/complaints/${id}`
 
       );
 
